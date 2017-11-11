@@ -14,21 +14,25 @@ namespace HypixelSharp.Objects
         /// </summary>
         [JsonProperty("watchdog_lastMinute")]
         public int BansLastMinute { get; internal set; }
+
         /// <summary>
         /// Total number of bans made by staff today
         /// </summary>
         [JsonProperty("staff_rollingDaily")]
         public int StaffRollingDaily { get; internal set; }
+
         /// <summary>
         /// Total number of bans made by watchdog
         /// </summary>
         [JsonProperty("watchdog_total")]
         public int TotalWatchdogBans { get; internal set; }
+
         /// <summary>
         /// Total number of bans made by watchdog today
         /// </summary>
         [JsonProperty("watchdog_rollingDaily")]
         public int WatchdogRollingDaily { get; internal set; }
+
         /// <summary>
         /// Total number of bans made by staff
         /// </summary>
@@ -39,10 +43,13 @@ namespace HypixelSharp.Objects
     {
         [JsonProperty("key")]
         public string ApiKey { get; internal set; }
+
         [JsonProperty("ownerUuid")]
         public string OwnerID { get; internal set; }
+
         [JsonProperty("totalQueries")]
         public long TotalQueries { get; internal set; }
+
         [JsonProperty("queriesInPastMin")]
         public int QueriesPastMinute { get; internal set; }
     }
