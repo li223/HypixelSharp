@@ -21,15 +21,12 @@ namespace HypixelSharp
         /// <returns></returns>
         public async Task<HypixelGuild> GetGuildAsync(string guildname)
         {
-            var GuildIDRequest = new HttpRequestMessage(HttpMethod.Get, new Uri($@"{_baserequest}/findGuild?key={_apikey}&byName={guildname}"));
-            var GuildIDResponse = await _http.SendAsync(GuildIDRequest);
-            if (GuildIDResponse.IsSuccessStatusCode)
+            var GuildIDData = await _http.GetStringAsync(new Uri($@"{_baserequest}/findGuild?key={_apikey}&byName={guildname}"));
+            var GuildID = JObject.Parse(GuildIDData).SelectToken("guild").ToString();
+            if (GuildID != null)
             {
-                var GuildIDData = await GuildIDResponse.Content.ReadAsStringAsync();
-                var GuildID = JObject.Parse(GuildIDData).SelectToken("guild").ToString();
-                var GuildRequest = new HttpRequestMessage(HttpMethod.Get, new Uri($@"{_baserequest}/guild?key={_apikey}&id={GuildID}"));
-                var GuildResponse = await _http.SendAsync(GuildRequest);
-                var GuildData = JObject.Parse(await GuildResponse.Content.ReadAsStringAsync()).SelectToken("guild").ToString();
+                var GuildResponse = await _http.GetStringAsync(new Uri($@"{_baserequest}/guild?key={_apikey}&id={GuildID}"));
+                var GuildData = JObject.Parse(GuildResponse).SelectToken("guild").ToString();
                 var Guild = JsonConvert.DeserializeObject<HypixelGuild>(GuildData);
                 return Guild;
             }
@@ -55,11 +52,15 @@ namespace HypixelSharp
             var playerdata = await _http.GetStringAsync(new Uri($"{_baserequest}/player?key={_apikey}&uuid={uuid}"));
             var playerjdata = JObject.Parse(playerdata).SelectToken("player").ToString();
             var playerobj = JsonConvert.DeserializeObject<HypixelPlayer>(playerjdata);
-            var sessiondata = await _http.GetStringAsync(new Uri($"{_baserequest}/session?key={_apikey}&uuid={uuid}"));
-            var sessionjdata = JObject.Parse(sessiondata).SelectToken("session").ToString();
-            var session = JsonConvert.DeserializeObject<Session>(sessionjdata);
-            playerobj.Session = session;
-            return playerobj;
+            if (playerobj != null)
+            {
+                var sessiondata = await _http.GetStringAsync(new Uri($"{_baserequest}/session?key={_apikey}&uuid={uuid}"));
+                var sessionjdata = JObject.Parse(sessiondata).SelectToken("session").ToString();
+                var session = JsonConvert.DeserializeObject<Session>(sessionjdata);
+                playerobj.Session = session;
+                return playerobj;
+            }
+            else return null;
         }
         /// <summary>
         /// Get basic info about the current api key
