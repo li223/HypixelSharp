@@ -14,6 +14,7 @@ namespace HypixelSharp
         private string _baserequest = "https://api.hypixel.net";
         private string _apikey { get; set; }
         public HypixelSharpClient(string apikey) => this._apikey = apikey;
+
         /// <summary>
         /// Get a guild's info
         /// </summary>
@@ -32,6 +33,7 @@ namespace HypixelSharp
             }
             else return null;
         }
+
         /// <summary>
         /// Get ban stats from Watchdog
         /// </summary>
@@ -42,6 +44,7 @@ namespace HypixelSharp
             var stats = JsonConvert.DeserializeObject<WatchdogStats>(Jdata);
             return stats;
         }
+
         /// <summary>
         /// Get a player's info
         /// </summary>
@@ -62,6 +65,7 @@ namespace HypixelSharp
             }
             else return null;
         }
+
         /// <summary>
         /// Get basic info about the current api key
         /// </summary>
