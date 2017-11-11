@@ -3,7 +3,7 @@
 Welcome to the waste of time that is the random things I do
 
 # How to set up
-You will need to get an API Key. This is done by using the command `/api` in game
+Clone/Download this repo, then you will need to get an API Key. This is done by using the command `/api` in game
 
 # Example
 ```cs
