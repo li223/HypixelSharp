@@ -20,7 +20,7 @@ namespace Example
         public async Task ExampleMethod()
         {
             var user = await Client.GetPlayerAsync("UserUUID");
-            Console.WriteLine($"Display Name: {user.DisplayName} || Last Logged in at: {new DateTime(1970, 1, 1).AddMilliseconds(user.LastLogin)}");
+            Console.WriteLine($"Player UUID: {user.UUID} || Display Name: {user.DisplayName}");
         }
     }
 }
