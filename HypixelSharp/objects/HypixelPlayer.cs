@@ -25,7 +25,7 @@ namespace HypixelSharp.Objects
         /// Player's one time achievements
         /// </summary>
         [JsonProperty("achievementsOneTime")]
-        public List<string> OneTimeAchievements { get; internal set; }
+        public List<dynamic> OneTimeAchievements { get; internal set; }
 
         /// <summary>
         /// Player Display Name
