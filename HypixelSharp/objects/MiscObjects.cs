@@ -45,7 +45,7 @@ namespace HypixelSharp.Objects
         public string ApiKey { get; internal set; }
 
         [JsonProperty("ownerUuid")]
-        public string OwnerID { get; internal set; }
+        public string OwnerUUID { get; internal set; }
 
         [JsonProperty("totalQueries")]
         public long TotalQueries { get; internal set; }
