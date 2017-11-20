@@ -209,7 +209,7 @@ namespace HypixelSharp.Objects
         public string CurrentCloak { get; internal set; }
 
         [JsonProperty("adsense_tokens")]
-        public int AdsenseTokens { get; internal set; }
+        public decimal AdsenseTokens { get; internal set; }
 
         [JsonProperty("vanityFirstConvertedBox")]
         public long VanityFirstConvertedBox { get; internal set; }
