@@ -25,7 +25,7 @@ namespace HypixelSharp.Objects
         /// Player's one time achievements
         /// </summary>
         [JsonProperty("achievementsOneTime")]
-        public List<dynamic> OneTimeAchievements { get; internal set; }
+        public List<string> OneTimeAchievements { get; internal set; }
 
         /// <summary>
         /// Player Display Name
@@ -45,7 +45,7 @@ namespace HypixelSharp.Objects
         /// Player's Karma
         /// </summary>
         [JsonProperty("karma")]
-        public int Karma { get; internal set; }
+        public decimal Karma { get; internal set; }
 
         /// <summary>
         /// Player's known aliases
@@ -54,7 +54,7 @@ namespace HypixelSharp.Objects
         public List<string> Aliases { get; internal set; }
 
         /// <summary>
-        /// Player's Lesser known aliases
+        /// Player's lower cased aliases
         /// </summary>
         [JsonProperty("knownAliasesLower")]
         public List<string> AliasesLower { get; internal set; }
@@ -71,11 +71,23 @@ namespace HypixelSharp.Objects
         [JsonProperty("mostRecentMinecraftVersion")]
         public int MinecraftVersion { get; internal set; }
 
+        [JsonProperty("mostRecentlyThanked")]
+        public string RecentlyThankedUsername { get; internal set; }
+
+        [JsonProperty("mostRecentlyThankedUuid")]
+        public string RecentlyThankedUUID { get; internal set; }
+
+        [JsonProperty("mostRecentlyTipped")]
+        public string RecentlyTippedUsername { get; internal set; }
+
+        [JsonProperty("mostRecentlyTippedUuid")]
+        public string RecentlyTippedUUID { get; internal set; }
+
         /// <summary>
         /// Player's network exp
         /// </summary>
         [JsonProperty("networkExp")]
-        public int NetworkExp { get; internal set; }
+        public decimal NetworkExp { get; internal set; }
 
         [JsonProperty("newClock")]
         public string NewClock { get; internal set; }
@@ -86,6 +98,14 @@ namespace HypixelSharp.Objects
         [JsonProperty("playername")]
         public string PlayerName { get; internal set; }
 
+        [JsonProperty("newPackageRank")]
+        public string NewPackageRank { get; internal set; }
+
+        [JsonProperty("notifications")]
+        public bool NotificationsEnabled { get; internal set; }
+
+        [JsonProperty("packageRank")]
+        public string PackageRank { get; internal set; }
         //todo player quests
 
         /// <summary>
@@ -131,6 +151,10 @@ namespace HypixelSharp.Objects
 
         [JsonProperty("lastEugeneMessage")]
         public long LastEugeneMessage { get; internal set; }
+
+        /// <summary>
+        /// The reward system, better known as "The Delivery Man"
+        /// </summary>
         [JsonProperty("eugene")]
         public Eugene Eugene { get; internal set; }
 
@@ -160,20 +184,14 @@ namespace HypixelSharp.Objects
         [JsonProperty("channel")]
         public string Channel { get; internal set; }
 
-        [JsonProperty("newPackageRank")]
-        public string NewPackageRank { get; internal set; }
-
         [JsonProperty("petStats")]
         public Dictionary<string, PetStats> Pets { get; internal set; }
 
         [JsonProperty("petJourneyTimestamp")]
         public long PetJourneyTimestamp { get; internal set; }
 
-        [JsonProperty("mostRecentlyTippedUuid")]
-        public string MostRecentlyTippedUser { get; internal set; }
-
         [JsonProperty("socialMedia")]
-        public Dictionary<string, string> SocialMedia { get; internal set; }
+        public SocialMediaLinks SocialMedia { get; internal set; }
 
         [JsonProperty("specialtyCooldowns")]
         public Dictionary<string, bool> SpecialtyCooldowns { get; internal set; }
@@ -202,6 +220,9 @@ namespace HypixelSharp.Objects
         [JsonProperty("rewardHighScore")]
         public int RewardHighScore { get; internal set; }
 
+        /// <summary>
+        /// Spectator flying speed
+        /// </summary>
         [JsonProperty("spec_speed")]
         public int SpecSpeed { get; internal set; }
 
@@ -234,6 +255,12 @@ namespace HypixelSharp.Objects
 
         [JsonProperty("currentGadget")]
         public string CurrentGadget { get; internal set; }
+        
+        [JsonProperty("quickjoin_timestamp")]
+        public ulong QuickjoinTimestamp { get; internal set; }
+
+        [JsonProperty("quickjoin_uses")]
+        public ulong QuickjoinUses { get; internal set; }
 
         [JsonIgnore]
         public Session Session { get; internal set; }
@@ -275,18 +302,30 @@ namespace HypixelSharp.Objects
     }
     public sealed class HousingMetadata
     {
+        /// <summary>
+        /// Blocks available to build with
+        /// </summary>
         [JsonProperty("allowedBlocks")]
         public List<string> AllowedBlocks { get; internal set; }
 
+        /// <summary>
+        /// Themes a player has unlocked
+        /// </summary>
         [JsonProperty("packages")]
         public List<string> Packages { get; internal set; }
 
         [JsonProperty("tutorialStep")]
         public string TutorialStep { get; internal set; }
 
+        /// <summary>
+        /// Player settings
+        /// </summary>
         [JsonProperty("playerSettings")]
         public Dictionary<object, string> PlayerSetting { get; internal set; }
 
+        /// <summary>
+        /// Song Playlist
+        /// </summary>
         [JsonProperty("playlist")]
         public string Playlist { get; internal set; }
     }
@@ -325,5 +364,16 @@ namespace HypixelSharp.Objects
 
         [JsonProperty("players")]
         public List<string> Players { get; internal set; }
+    }
+    public sealed class SocialMediaLinks
+    {
+        [JsonProperty("YOUTUBE")]
+        public string YouTube { get; internal set; }
+        [JsonProperty("INSTAGRAM")]
+        public string Instagram { get; internal set; }
+        [JsonProperty("TWITCH")]
+        public string Twitch { get; internal set; }
+        [JsonProperty("link")]
+        public Dictionary<string, string> Links { get; internal set; }
     }
 }

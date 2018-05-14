@@ -67,6 +67,26 @@ namespace HypixelSharp
         }
 
         /// <summary>
+        /// Get a player's info
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <returns></returns>
+        public async Task<HypixelPlayer> GetPlayerbyNameAsync(string name)
+        {
+            var playerdata = await _http.GetStringAsync(new Uri($"{_baserequest}/player?key={_apikey}&name={name}"));
+            var playerjdata = JObject.Parse(playerdata).SelectToken("player").ToString();
+            var playerobj = JsonConvert.DeserializeObject<HypixelPlayer>(playerjdata);
+            if (playerobj != null)
+            {
+                var sessiondata = await _http.GetStringAsync(new Uri($"{_baserequest}/session?key={_apikey}&uuid={playerobj.UUID}"));
+                var sessionjdata = JObject.Parse(sessiondata).SelectToken("session").ToString();
+                var session = JsonConvert.DeserializeObject<Session>(sessionjdata);
+                playerobj.Session = session;
+                return playerobj;
+            }
+            else return null;
+        }
+        /// <summary>
         /// Get basic info about the current api key
         /// </summary>
         /// <returns></returns>
