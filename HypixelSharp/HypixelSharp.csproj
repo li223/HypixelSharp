@@ -48,6 +48,7 @@
     <Compile Include="objects\HypixelGuild.cs" />
     <Compile Include="objects\HypixelPlayer.cs" />
     <Compile Include="objects\MiscObjects.cs" />
+    <Compile Include="objects\StatsObjects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
