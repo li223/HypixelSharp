@@ -11,15 +11,11 @@ namespace Example
     public class Program
     {
         public HypixelSharpClient Client = new HypixelSharpClient("YourApiKey");
-        static void Main(string[] args)
-        {
-            new Program().ExampleMethod().GetAwaiter().GetResult();
-            Console.ReadKey();
-        }
-        public async Task ExampleMethod()
+        public static async Task Main(string[] args)
         {
             var user = await Client.GetPlayerByNameAsync("ABC");
             Console.WriteLine($"Player UUID: {user.UUID} || Display Name: {user.DisplayName}");
+            Console.ReadKey();
         }
     }
 }
