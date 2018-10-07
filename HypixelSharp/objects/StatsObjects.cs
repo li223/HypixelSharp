@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
+//Effort
+#pragma warning disable CS1591
 namespace HypixelSharp
 {
     public struct Stats

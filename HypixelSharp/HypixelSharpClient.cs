@@ -2,17 +2,24 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace HypixelSharp
 {
+    /// <summary>
+    /// Main Clinet
+    /// </summary>
     public class HypixelSharpClient
     {
         private HttpClient _http = new HttpClient();
-        private string _baserequest = "https://api.hypixel.net";
+        private readonly string _baserequest = "https://api.hypixel.net";
         private string _apikey { get; set; }
+
+        /// <summary>
+        /// Client Ctor
+        /// </summary>
+        /// <param name="apikey">Your apikey, use /api command while in-game to get your key</param>
         public HypixelSharpClient(string apikey) => this._apikey = apikey;
 
         /// <summary>
@@ -20,13 +27,13 @@ namespace HypixelSharp
         /// </summary>
         /// <param name="guildname"></param>
         /// <returns></returns>
-        public async Task<HypixelGuild> GetGuildAsync(string guildname)
+        public async Task<HypixelGuild?> GetGuildAsync(string guildname)
         {
-            var GuildIDData = await _http.GetStringAsync(new Uri($@"{_baserequest}/findGuild?key={_apikey}&byName={guildname}"));
+            var GuildIDData = await _http.GetStringAsync(new Uri($"{_baserequest}/findGuild?key={_apikey}&byName={guildname}"));
             var GuildID = JObject.Parse(GuildIDData).SelectToken("guild").ToString();
             if (GuildID != null)
             {
-                var GuildResponse = await _http.GetStringAsync(new Uri($@"{_baserequest}/guild?key={_apikey}&id={GuildID}"));
+                var GuildResponse = await _http.GetStringAsync(new Uri($"{_baserequest}/guild?key={_apikey}&id={GuildID}"));
                 var GuildData = JObject.Parse(GuildResponse).SelectToken("guild").ToString();
                 var Guild = JsonConvert.DeserializeObject<HypixelGuild>(GuildData);
                 return Guild;
@@ -37,10 +44,10 @@ namespace HypixelSharp
         /// <summary>
         /// Get ban stats from Watchdog
         /// </summary>
-        /// <returns></returns>
+        /// <returns>WatchdogStats Object</returns>
         public async Task<WatchdogStats> GetWatchdogStatsAsync()
         {
-            var Jdata = await _http.GetStringAsync(new Uri($@"{ _baserequest }/watchdogstats?key={ _apikey}"));
+            var Jdata = await _http.GetStringAsync(new Uri($"{ _baserequest }/watchdogstats?key={ _apikey}"));
             var stats = JsonConvert.DeserializeObject<WatchdogStats>(Jdata);
             return stats;
         }
@@ -48,8 +55,8 @@ namespace HypixelSharp
         /// <summary>
         /// Get a player's info
         /// </summary>
-        /// <param name="uuid"></param>
-        /// <returns></returns>
+        /// <param name="uuid">Their UUID</param>
+        /// <returns>HypixelPlayer Object</returns>
         public async Task<HypixelPlayer> GetPlayerAsync(string uuid)
         {
             var playerdata = await _http.GetStringAsync(new Uri($"{_baserequest}/player?key={_apikey}&uuid={uuid}"));
@@ -69,8 +76,8 @@ namespace HypixelSharp
         /// <summary>
         /// Get a player's info
         /// </summary>
-        /// <param name="uuid"></param>
-        /// <returns></returns>
+        /// <param name="name">Their username</param>
+        /// <returns>HypixelPlayer Object</returns>
         public async Task<HypixelPlayer> GetPlayerbyNameAsync(string name)
         {
             var playerdata = await _http.GetStringAsync(new Uri($"{_baserequest}/player?key={_apikey}&name={name}"));
@@ -80,7 +87,7 @@ namespace HypixelSharp
             {
                 var sessiondata = await _http.GetStringAsync(new Uri($"{_baserequest}/session?key={_apikey}&uuid={playerobj.UUID}"));
                 var sessionjdata = JObject.Parse(sessiondata).SelectToken("session").ToString();
-                var session = JsonConvert.DeserializeObject<Session>(sessionjdata);
+                var session = JsonConvert.DeserializeObject<Session?>(sessionjdata);
                 playerobj.Session = session;
                 return playerobj;
             }
@@ -89,7 +96,7 @@ namespace HypixelSharp
         /// <summary>
         /// Get basic info about the current api key
         /// </summary>
-        /// <returns></returns>
+        /// <returns>APIKey Object</returns>
         public async Task<APIKey> GetKeyInfoAsync()
         {
             var jdata = await _http.GetStringAsync(new Uri($"{_baserequest}/key?key={_apikey}"));

@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+    <DocumentationFile>bin\Debug\HypixelSharp.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,10 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HypixelSharpClient.cs" />
-    <Compile Include="objects\HypixelGuild.cs" />
-    <Compile Include="objects\HypixelPlayer.cs" />
-    <Compile Include="objects\MiscObjects.cs" />
-    <Compile Include="objects\StatsObjects.cs" />
+    <Compile Include="Objects\HypixelGuildObjects.cs" />
+    <Compile Include="Objects\HypixelObjects.cs" />
+    <Compile Include="Objects\MiscObjects.cs" />
+    <Compile Include="Objects\StatsObjects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

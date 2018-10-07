@@ -2,9 +2,14 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
+//Effort
+#pragma warning disable CS1591
 namespace HypixelSharp.Objects
 {
-    public sealed class HypixelGuild
+    /// <summary>
+    /// Guild Struct
+    /// </summary>
+    public struct HypixelGuild
     {
         /// <summary>
         /// Guild's ID
@@ -78,9 +83,15 @@ namespace HypixelSharp.Objects
         [JsonProperty("canTag")]
         public bool CanTag { get; private set; }
 
+        /// <summary>
+        /// If the guild is listed publically
+        /// </summary>
         [JsonProperty("publiclyListed")]
         public bool IsPubliclyListed { get; private set; }
 
+        /// <summary>
+        /// If the guild is joinable
+        /// </summary>
         [JsonProperty("joinable")]
         public bool IsJoinable { get; private set; }
 
@@ -96,7 +107,11 @@ namespace HypixelSharp.Objects
         [JsonExtensionData]
         public Dictionary<string, JToken> DailyCoins { get; private set; }
     }
-    public sealed class HypixelGuildMember
+
+    /// <summary>
+    /// Guild Member Struct
+    /// </summary>
+    public struct HypixelGuildMember
     {
         /// <summary>
         /// Members user ID
@@ -122,7 +137,11 @@ namespace HypixelSharp.Objects
         [JsonExtensionData]
         public Dictionary<string, JToken> DailyCoins { get; private set; }
     }
-    public sealed class Banner
+
+    /// <summary>
+    /// Banner Struct
+    /// </summary>
+    public struct Banner
     {
         [JsonProperty("Base")]
         public int Base { get; private set; }
@@ -130,7 +149,11 @@ namespace HypixelSharp.Objects
         [JsonProperty("Patterns")]
         public List<GuildPattern> Patterns { get; private set; }
     }
-    public sealed class GuildPattern
+
+    /// <summary>
+    /// Guild Pattern Struct
+    /// </summary>
+    public struct GuildPattern
     {
         [JsonProperty("Pattern")]
         public string Pattern { get; private set; }

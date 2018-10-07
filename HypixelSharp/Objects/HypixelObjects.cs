@@ -1,19 +1,18 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HypixelSharp;
-using System.Net.Http;
 
+//Effort
+#pragma warning disable CS1591
 namespace HypixelSharp.Objects
 {
     public sealed class HypixelPlayer
     {
+        /// <summary>
+        /// Player's Id
+        /// </summary>
         [JsonProperty("_id")]
-        public string ID { get; private set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Player's achievements
@@ -264,12 +263,12 @@ namespace HypixelSharp.Objects
         public ulong QuickjoinUses { get; private set; }
 
         [JsonIgnore]
-        public Session Session { get; internal set; }
+        public Session? Session { get; internal set; }
 
         [JsonExtensionData]
         public Dictionary<string, JToken> ExtensionData { get; private set; }
     }
-    public sealed class Active
+    public struct Active
     {
         [JsonProperty("started")]
         public long Started { get; private set; }
@@ -277,7 +276,8 @@ namespace HypixelSharp.Objects
         [JsonProperty("objectives")]
         public string Objectives { get; private set; }
     }
-    public sealed class Settings
+
+    public struct Settings
     {
         [JsonProperty("playerVisibility")]
         public bool PlayerVisible { get; private set; }
@@ -285,7 +285,8 @@ namespace HypixelSharp.Objects
         [JsonProperty("chatVisibility")]
         public bool ChatVisible { get; private set; }
     }
-    public sealed class ParkourTimes
+
+    public struct ParkourTimes
     {
         [JsonProperty("timeStart")]
         public long TimeStart { get; private set; }
@@ -293,7 +294,8 @@ namespace HypixelSharp.Objects
         [JsonProperty("timeTook")]
         public int TimeTaken { get; private set; }
     }
-    public sealed class Eugene
+
+    public struct Eugene
     {
         [JsonProperty("dailyTwoKExp")]
         public long DailyTwoKExp { get; private set; }
@@ -301,7 +303,8 @@ namespace HypixelSharp.Objects
         [JsonProperty("weekly_booster")]
         public long WeeklyBooster { get; private set; }
     }
-    public sealed class HousingMetadata
+
+    public struct HousingMetadata
     {
         /// <summary>
         /// Blocks available to build with
@@ -330,7 +333,8 @@ namespace HypixelSharp.Objects
         [JsonProperty("playlist")]
         public string Playlist { get; private set; }
     }
-    public sealed class PetStats
+
+    public struct PetStats
     {
         [JsonProperty("name")]
         public string Name { get; private set; }
@@ -347,7 +351,8 @@ namespace HypixelSharp.Objects
         [JsonProperty("experience")]
         public int Experience { get; private set; }
     }
-    public sealed class PetStatusValues
+
+    public struct PetStatusValues
     {
         [JsonProperty("value")]
         public int Value { get; private set; }
@@ -355,7 +360,8 @@ namespace HypixelSharp.Objects
         [JsonProperty("timestamp")]
         public long Timestamp { get; private set; }
     }
-    public sealed class Session
+
+    public struct Session
     {
         [JsonProperty("gameType")]
         public string GameType { get; private set; }
@@ -366,7 +372,8 @@ namespace HypixelSharp.Objects
         [JsonProperty("players")]
         public List<string> Players { get; private set; }
     }
-    public sealed class SocialMediaLinks
+
+    public struct SocialMediaLinks
     {
         [JsonProperty("YOUTUBE")]
         public string YouTube { get; private set; }
